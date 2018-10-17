@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
+    <script src="cloud.js"></script>
+  </head>
+  <body>
+    <div id="chart"></div>
+    <script>
+      var text_string = "Of course that’s your contention. You’re a first year grad student. You just got finished readin’ some Marxian historian, Pete Garrison probably. You’re gonna be convinced of that ’til next month when you get to James Lemon and then you’re gonna be talkin’ about how the economies of Virginia and Pennsylvania were entrepreneurial and capitalist way back in 1740. That’s gonna last until next year. You’re gonna be in here regurgitating Gordon Wood, talkin’ about, you know, the Pre-Revolutionary utopia and the capital-forming effects of military mobilization… ‘Wood drastically underestimates the impact of social distinctions predicated upon wealth, especially inherited wealth.’ You got that from Vickers, Work in Essex County, page 98, right? Yeah, I read that, too. Were you gonna plagiarize the whole thing for us? Do you have any thoughts of your own on this matter? Or do you, is that your thing? You come into a bar. You read some obscure passage and then pretend, you pawn it off as your own, as your own idea just to impress some girls and embarrass my friend? See, the sad thing about a guy like you is in 50 years, you’re gonna start doin’ some thinkin’ on your own and you’re gonna come up with the fact that there are two certainties in life. One: don’t do that. And two: you dropped a hundred and fifty grand on a fuckin’ education you coulda got for a dollar fifty in late charges at the public library.";
+
+      drawWordCloud(text_string);
+
+      function drawWordCloud(text_string){
+        var words = ["#ebola", "#flu", "#health", "#zika", "000", "1", "10", "100", "12", "1918", "2", "20", "2018", "3", "30", "4", "5", "6", "7", "8", "9", "africa", "ago", "and_kell", "and_mcdowell", "anoticingsenpai", "anti", "asphyxia", "ass", "avoid", "awithonelison", "b", "baby", "back", "bad", "badzoot7", "bc", "bed", "big", "bird", "birth", "bit", "blood", "body", "brain", "bug", "butt", "c", "call", "called", "can't", "cancer", "care", "carlsmythe", "case", "cases", "cat", "catch", "cattlechildren", "caught", "caused", "cdc", "check", "chicken", "child", "children", "chrisjohnsonmd", "chrisvcsefalvay", "clinic", "cold", "colds", "coming", "common", "community", "confirmed", "congo", "constipation", "control", "cough", "country", "d", "day", "days", "deadly", "death", "deaths", "deliver", "diarrhea", "didn", "didn't", "die", "died", "disease", "diseases", "djt10", "dkegel", "doctor", "doctors", "doesn't", "dog", "don", "don't", "doritmi", "dr", "drink", "due", "dying", "early", "eat", "eating", "ebola", "effective", "emmagpaley", "end", "epidemic", "explosive", "face", "fact", "family", "fart", "feel", "feeling", "fever", "fight", "filled", "finally", "find", "flu", "food", "found", "free", "friend", "friends", "fuck", "fucking", "full", "fun", "game", "gave", "geoffschuler", "give", "god", "gonna", "good", "great", "guess", "hands", "happy", "hard", "head", "health", "healthy", "hear", "henningtveit", "high", "hit", "home", "hope", "hospital", "hot", "hours", "house", "human", "i'll", "i'm", "i've", "illness", "immune", "important", "including", "infected", "infection", "influenza", "it's", "jab", "janem1276", "jjfox123", "jkellyca", "jpsportsminer", "kidoctr", "kids", "kill", "killed", "learn", "left", "life", "literally", "live", "ll", "lol", "long", "lost", "lot", "lots", "love", "m", "made", "make", "makes", "making", "malaria", "malnutrition", "man", "march", "marketing", "measles", "medical", "medicine", "million", "mom", "money", "month", "months", "morning", "mouth", "n", "news", "night", "number", "nurse", "outbreak", "pain", "pandemic", "parents", "part", "past", "patients", "pee", "people", "person", "pizza", "place", "plasticdoe", "play", "pneumonia", "point", "poo", "popular", "post", "pretty", "prevent", "protect", "public", "put", "rbuzzy1111", "read", "real", "realdonaldtrump", "remember", "research", "response", "rest", "retweet", "risk", "room", "rosewind2007", "rt", "s", "safe", "school", "season", "severe", "shit", "shot", "shots", "show", "sick", "side", "siubhan_h", "sleep", "spanish", "spread", "staff", "start", "started", "state", "stay", "stomach", "stop", "story", "study", "suequez", "support", "swine", "symptoms", "system", "t", "taking", "talk", "team", "that's", "thing", "things", "thismomhcn", "thought", "throat", "time", "times", "tinfoilawards", "today", "told", "tomorrow", "tonight", "top", "travel", "trump", "u", "vaccinated", "vaccination", "vaccinations", "vaccine", "vaccines", "vbalance03", "ve", "verbal", "video", "virus", "viruses", "visit", "vomiting", "w", "wait", "watch", "water", "week", "weekend", "weeks", "what's", "what_if_007", "win", "winter", "women", "work", "working", "world", "worse", "worst", "wrong", "y", "yeah", "year", "years", "yesterday", "you're", "young", "zika"];
+        
+        var word_count = {"#ebola":1626, "#flu":4490, "#health":1160, "#zika":1266, "000":1574, "1":3084, "10":1848, "100":1057, "12":878, "1918":769, "2":4471, "20":2387, "2018":1835, "3":3466, "30":890, "4":2289, "5":2110, "6":1648, "7":1171, "8":1482, "9":1069, "africa":842, "ago":1397, "and_kell":878, "and_mcdowell":813, "anoticingsenpai":767, "anti":837, "asphyxia":1180, "ass":979, "avoid":767, "awithonelison":857, "b":954, "baby":1054, "back":4188, "bad":3904, "badzoot7":826, "bc":1009, "bed":1681, "big":1439, "bird":1246, "birth":1561, "bit":914, "blood":809, "body":2018, "brain":772, "bug":771, "butt":886, "c":951, "call":1310, "called":872, "can't":1809, "cancer":928, "care":2442, "carlsmythe":1112, "case":1662, "cases":1851, "cat":808, "catch":905, "cattlechildren":831, "caught":914, "caused":754, "cdc":1424, "check":1161, "chicken":778, "child":1254, "children":2465, "chrisjohnsonmd":1162, "chrisvcsefalvay":854, "clinic":1088, "cold":5971, "colds":919, "coming":1597, "common":877, "community":775, "confirmed":774, "congo":885, "constipation":2338, "control":895, "cough":1348, "country":872, "d":1241, "day":5190, "days":3509, "deadly":823, "death":1549, "deaths":1506, "deliver":1254, "diarrhea":23085, "didn":1039, "didn't":1209, "die":1490, "died":2004, "disease":2963, "diseases":2613, "djt10":875, "dkegel":937, "doctor":1677, "doctors":777, "doesn't":974, "dog":2074, "don":3115, "don't":4341, "doritmi":1404, "dr":1517, "drink":769, "due":1508, "dying":911, "early":1057, "eat":1426, "eating":836, "ebola":7800, "effective":821, "emmagpaley":1381, "end":1294, "epidemic":1219, "explosive":948, "face":782, "fact":792, "family":1888, "fart":6706, "feel":3477, "feeling":1922, "fever":2167, "fight":1031, "filled":931, "finally":860, "find":1714, "flu":67922, "food":1629, "found":953, "free":2843, "friend":1124, "friends":943, "fuck":867, "fucking":1112, "full":1301, "fun":806, "game":1150, "gave":823, "geoffschuler":1022, "give":1840, "god":1002, "gonna":1048, "good":4467, "great":2318, "guess":771, "hands":895, "happy":907, "hard":1210, "head":964, "health":5977, "healthy":1501, "hear":847, "henningtveit":793, "high":1442, "hit":938, "home":3316, "hope":2370, "hospital":1374, "hot":894, "hours":1184, "house":1076, "human":754, "i'll":833, "i'm":5657, "i've":2298, "illness":1170, "immune":1850, "important":1043, "including":949, "infected":768, "infection":1500, "influenza":1421, "it's":5887, "jab":1851, "janem1276":1155, "jjfox123":811, "jkellyca":1190, "jpsportsminer":761, "kidoctr":1105, "kids":1887, "kill":868, "killed":955, "learn":1239, "left":862, "life":2275, "literally":874, "live":1076, "ll":1154, "lol":1222, "long":1635, "lost":1243, "lot":1421, "lots":832, "love":1935, "m":5614, "made":1880, "make":3888, "makes":1074, "making":1085, "malaria":1485, "malnutrition":1242, "man":2403, "march":751, "marketing":1361, "measles":6696, "medical":1393, "medicine":1649, "million":904, "mom":1158, "money":1299, "month":1020, "months":1233, "morning":1426, "mouth":1788, "n":787, "news":2332, "night":1796, "number":813, "nurse":752, "outbreak":3071, "pain":1397, "pandemic":1132, "parents":822, "part":999, "past":1033, "patients":1244, "pee":798, "people":8476, "person":1085, "pizza":860, "place":752, "plasticdoe":1240, "play":889, "pneumonia":2084, "point":955, "poo":2992, "popular":795, "post":1033, "pretty":878, "prevent":1179, "protect":1608, "public":1415, "put":1242, "rbuzzy1111":1106, "read":2077, "real":1399, "realdonaldtrump":1239, "remember":1123, "research":883, "response":793, "rest":1127, "retweet":1126, "risk":1604, "room":817, "rosewind2007":871, "rt":1170, "s":12141, "safe":755, "school":2060, "season":6804, "severe":949, "shit":1936, "shot":8391, "shots":2752, "show":1428, "sick":6629, "side":875, "siubhan_h":808, "sleep":1095, "spanish":938, "spread":1555, "staff":929, "start":1342, "started":875, "state":878, "stay":1708, "stomach":2215, "stop":1744, "story":784, "study":1000, "suequez":787, "support":761, "swine":936, "symptoms":2650, "system":1704, "t":9730, "taking":1152, "talk":996, "team":1009, "that's":1513, "thing":1871, "things":1486, "thismomhcn":865, "thought":1507, "throat":977, "time":6575, "times":1200, "tinfoilawards":850, "today":4945, "told":1291, "tomorrow":1318, "tonight":956, "top":795, "travel":801, "trump":1279, "u":2696, "vaccinated":1528, "vaccination":1904, "vaccinations":760, "vaccine":6574, "vaccines":2454, "vbalance03":1206, "ve":2618, "verbal":1313, "video":818, "virus":4853, "viruses":981, "visit":916, "vomiting":1138, "w":1550, "wait":829, "watch":1793, "water":1581, "week":4154, "weekend":887, "weeks":2079, "what's":775, "what_if_007":1087, "win":2264, "winter":1581, "women":942, "work":4173, "working":994, "world":1963, "worse":1080, "worst":1067, "wrong":933, "y":759, "yeah":878, "year":5796, "years":2958, "yesterday":1007, "you're":1682, "young":859, "zika":2642};
+
+        var svg_location = "#chart";
+        var width = $(document).width();
+        var height = $(document).height();
+
+        var fill = d3.scale.category20();
+
+        var word_entries = d3.entries(word_count);
+
+        var xScale = d3.scale.linear()
+           .domain([0, d3.max(word_entries, function(d) {
+              return d.value;
+            })
+           ])
+           .range([10,100]);
+
+        d3.layout.cloud().size([width, height])
+          .timeInterval(20)
+          .words(word_entries)
+          .fontSize(function(d) { return xScale(+d.value); })
+          .text(function(d) { return d.key; })
+          .rotate(function() { return ~~(Math.random() * 2) * 90; })
+          .font("Impact")
+          .on("end", draw)
+          .start();
+
+        function draw(words) {
+          d3.select(svg_location).append("svg")
+              .attr("width", width)
+              .attr("height", height)
+            .append("g")
+              .attr("transform", "translate(" + [width >> 1, height >> 1] + ")")
+            .selectAll("text")
+              .data(words)
+            .enter().append("text")
+              .style("font-size", function(d) { return xScale(d.value) + "px"; })
+              .style("font-family", "Impact")
+              .style("fill", function(d, i) { return fill(i); })
+              .attr("text-anchor", "middle")
+              .attr("transform", function(d) {
+                return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+              })
+              .text(function(d) { return d.key; });
+        }
+
+        d3.layout.cloud().stop();
+      }
+    </script>
+  </body>
+</html>

@@ -9,7 +9,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 import twitter4j.Status;
 import twitter4j.TwitterObjectFactory;
 
-public class mrpMapper extends Mapper<LongWritable, Text, Text, Text> {
+public class mrpMapper extends Mapper<LongWritable, Text, Text, LongWritable> {
 
 	@Override
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
@@ -23,9 +23,8 @@ public class mrpMapper extends Mapper<LongWritable, Text, Text, Text> {
 		}
 
 		String username=status.getUser().getScreenName();
-		String msg=status.getText();
 
-		context.write(new Text(username+""), new Text(msg));
+		context.write(new Text(username), new LongWritable(status.getId()));
 
 	}
 }

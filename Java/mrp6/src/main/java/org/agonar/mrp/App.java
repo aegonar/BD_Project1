@@ -10,7 +10,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 public class App {
     public static void main(String[] args) throws Exception {
         if (args.length != 2) {
-            System.err.println("Usage: CountSchoolByState <input path> <output path>");
+            System.err.println("Usage: hadoop jar mrp.jar <input path> <output path>");
             System.exit(-1);
         }
         Job job = new Job();
@@ -22,6 +22,9 @@ public class App {
         job.setMapperClass(org.agonar.mrp.mrpMapper.class);
         job.setReducerClass(org.agonar.mrp.mrpReducer.class);
 
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(LongWritable.class);
+        
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
 
